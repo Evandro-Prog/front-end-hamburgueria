@@ -1,4 +1,6 @@
 import styled from "styled-components";
+import { Link as ReactLink } from "react-router-dom";
+
 import BackgroundLogin from '../../assets/background-login.svg'
 import Background2 from '../../assets/background-2.svg'
 
@@ -20,7 +22,7 @@ export const LeftContainer = styled.div`
     align-items: center;
 
     img{
-        width: 80%
+        width: 65%
     }
 `
 export const RigtContainer = styled.div`
@@ -94,4 +96,9 @@ export const InputContainer = styled.div`
         font-weight: 600;
         height: 10px;
     }
+`
+
+export const Link = styled(ReactLink)`
+    text-decoration: none;
+    color: #fff;
 `

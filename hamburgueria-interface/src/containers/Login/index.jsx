@@ -1,14 +1,16 @@
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
+import { useNavigate } from 'react-router-dom';
 import * as yup from 'yup';
 import { toast } from 'react-toastify';
-import { Container, LeftContainer, RigtContainer, Title, Form, InputContainer } from "./styles";
+
+import { Container, LeftContainer, RigtContainer, Title, Form, InputContainer, Link } from "./styles";
 import { Button } from "../../components/Button";
 import Logo from '../../assets/Logo.svg';
 import { api } from '../../services/api';
 
 export function Login() {
-
+    const navigate = useNavigate()
     // Validation schema using Yup
     const schema = yup
         .object({
@@ -23,17 +25,34 @@ export function Login() {
 
     // Function to handle form submission
     const onSubmit = async (data) => {
-        const response = await toast.promise(
-            api.post('/session', {
-                email: data.email,
-                password: data.password
-            }),
-            {
-                pending: 'Aguarde...',
-                success: 'Login realizado com sucesso!',
-                error: 'Erro ao realizar o login, verifique suas credenciais.'
-            }
-        )
+        try {
+            const { data: { token } } = await toast.promise(
+                api.post('/session', {
+                    email: data.email,
+                    password: data.password
+                }),
+                {
+                    pending: 'Aguarde...',
+
+                    success: {
+
+                        render() {
+
+                            setTimeout(() => {
+                                navigate('/')
+                            }, 2000)
+
+                            return 'Login realizado com sucesso!'
+                        }
+                    },
+                }
+            )
+
+            localStorage.setItem('token', token)
+
+        } catch (error) {
+            toast.error('Erro ao realizar o login, verifique suas credenciais.')
+        }
     }
 
     return (
@@ -60,7 +79,7 @@ export function Login() {
                     </InputContainer>
                     <Button type='submit'>Entrar</Button>
                 </Form>
-                <p>Não possui conta? <a>Clique aqui!</a> </p>
+                <p>Não possui conta? <Link to="/cadastro">Clique aqui!</Link> </p>
             </RigtContainer>
         </Container>
 
