@@ -70,3 +70,10 @@ export const ProductsContainer = styled.div`
     max-width: 1280px;
     margin: 50px auto;
 `
+export const FooterButtonContainer = styled.div`
+    display: flex;
+    justify-content: center;  
+    margin: 0 auto 30px;
+    width: 20%;
+    height: 60px; 
+`

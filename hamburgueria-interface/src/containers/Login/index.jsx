@@ -4,13 +4,16 @@ import { useNavigate } from 'react-router-dom';
 import * as yup from 'yup';
 import { toast } from 'react-toastify';
 
+import { useUser } from '../../hooks/UserContext';
 import { Container, LeftContainer, RigtContainer, Title, Form, InputContainer, Link } from "./styles";
-import { Button } from "../../components/Button";
+import { Button } from '../../components';
 import Logo from '../../assets/Logo.svg';
 import { api } from '../../services/api';
 
 export function Login() {
     const navigate = useNavigate()
+    const { putUserData } = useUser()
+
     // Validation schema using Yup
     const schema = yup
         .object({
@@ -26,7 +29,7 @@ export function Login() {
     // Function to handle form submission
     const onSubmit = async (data) => {
         try {
-            const { data: { token } } = await toast.promise(
+            const { data: userData } = await toast.promise(
                 api.post('/session', {
                     email: data.email,
                     password: data.password
@@ -48,7 +51,7 @@ export function Login() {
                 }
             )
 
-            localStorage.setItem('token', token)
+            putUserData (userData)           
 
         } catch (error) {
             toast.error('Erro ao realizar o login, verifique suas credenciais.')

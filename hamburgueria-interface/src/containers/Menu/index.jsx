@@ -2,8 +2,8 @@ import { useState, useEffect } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 
 import { api } from '../../services/api'
-import { Banner, CategoryMenu, Container, ProductsContainer, CategoryButton } from './styles';
-import { CardProduct } from '../../components/CardProduct';
+import { Button, CardProduct } from '../../components'
+import { Banner, CategoryMenu, Container, ProductsContainer, CategoryButton, FooterButtonContainer } from './styles';
 import { formatPrice } from '../../utils/formatPrice';
 
 export function Menu() {
@@ -95,7 +95,15 @@ export function Menu() {
                     <CardProduct product={product} key={product.id} />
                 ))}
             </ProductsContainer>
-
-        </Container>
+            <FooterButtonContainer>
+                <Button
+                    onClick={() => {
+                        navigate({ pathname: '/' })
+                    }}
+                >
+                    Voltar
+                </Button>
+            </FooterButtonContainer>
+        </Container >
     )
 }
