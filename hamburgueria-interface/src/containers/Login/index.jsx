@@ -42,7 +42,11 @@ export function Login() {
                         render() {
 
                             setTimeout(() => {
-                                navigate('/')
+                                if (userData?.admin) {
+                                    navigate('/admin/pedidos')
+                                } else {
+                                    navigate('/')
+                                }
                             }, 2000)
 
                             return 'Login realizado com sucesso!'
@@ -51,7 +55,7 @@ export function Login() {
                 }
             )
 
-            putUserData (userData)           
+            putUserData(userData)
 
         } catch (error) {
             toast.error('Erro ao realizar o login, verifique suas credenciais.')

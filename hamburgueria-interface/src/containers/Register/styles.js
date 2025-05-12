@@ -53,7 +53,7 @@ export const Title = styled.h2`
     font-family: "Road Rage", sans-serif;
     font-size: 40px;
     font-weight: 400;    
-    color: #9758A6;    
+    color: ${props => props.theme.purple};    
 `
 export const Form = styled.form`
     display: flex;

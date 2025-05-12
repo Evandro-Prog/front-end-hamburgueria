@@ -44,34 +44,7 @@ export function CartResume() {
                 progress: undefined,
                 theme: "light"
             });
-        }
-
-        /* try {
-            const { status } =
-                await api.post('/orders', {products}, {
-                    validateStatus: () => true,
-                })
-
-            if (status === 200 || status === 201) {
-                clearCart()
-                setTimeout(() => {
-                    navigate('/')
-                }, 2000)
-
-                toast.success('Pedido realizado com sucesso!')
-
-            } else if (status === 400) {
-
-                toast.error('Falha ao realizar seu pedido!')
-
-            } else {
-
-                throw new Error()
-            }
-
-        } catch (error) {
-            toast.error('Erro ao finalizar pedido, tente novamente!')
-        } */
+        }        
     }
 
 
